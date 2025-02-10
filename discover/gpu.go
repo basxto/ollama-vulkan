@@ -767,7 +767,7 @@ func LoadVulkanMgmt(vulkanLibPaths []string, capLibPaths []string) (int, *C.vk_h
 
 			C.vk_init(vkLib, capLib, &resp)
 			if resp.err != nil {
-				slog.Debug("Unable to load vulkan", "library", vkLibPath, capLibPath, "error", C.GoString(resp.err))
+				slog.Warn("Unable to load Vulkan", "library", fmt.Sprintf("%s & %s", vkLibPath, capLibPath), "error", C.GoString(resp.err))
 				C.free(unsafe.Pointer(resp.err))
 			} else {
 				return int(resp.num_devices), &resp.ch, vkLibPath, capLibPath
